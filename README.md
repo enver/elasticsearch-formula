@@ -5,3 +5,7 @@ Note: See the full [Salt Formulas installation and usage instructions](http://do
 
 # Available states
 * elasticsearch
+
+# Acknowledgment
+
+Thanks to [Zijad](https://github.com/zijad) for developing first version of formula.
