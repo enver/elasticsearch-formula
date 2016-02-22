@@ -1,0 +1,6 @@
+{% set elasticsearch = salt['grains.filter_by']({
+  'RedHat': {
+    'pkg': 'elasticsearch',
+    'svc': 'elasticsearch'
+  }
+}, merge=salt['pillar.get']('elasticsearch')) %}

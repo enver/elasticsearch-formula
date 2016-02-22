@@ -1,0 +1,22 @@
+elasticsearch:
+  version:
+    - 1
+    - 7
+    - 5-1
+  config:
+    cluster:
+      name: elasticsearch
+    node:
+      name: {{ salt['grains.get']('es_node_name', grains['fqdn']) }}
+    network:
+      host: {{ grains['ip4_interfaces']['eth0'][0] }}
+    discovery:
+      zen:
+        ping:
+          timeout: '3s'
+          multicast.enabled: false
+    bootstrap:
+      mlockall: false
+    http:
+      cors:
+        enabled: true
