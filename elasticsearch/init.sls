@@ -9,7 +9,7 @@ elasticsearch:
   pkg:
     - installed
     - version: {{ version }}
-    - name: {{elasticsearch.pkg}}
+    - name: {{ elasticsearch.pkg }}
     - require:
       - pkgrepo: elasticsearch-repo
 
@@ -29,4 +29,17 @@ elasticsearch:
     - enable: True
     - require:
       - pkg: elasticsearch
+      - augeas: elasticsearch-sysconfig
       - file: elasticsearch
+
+elasticsearch-sysconfig:
+  augeas:
+    - change
+    - context: /files{{ elasticsearch.syscfg }}
+    - changes:
+      {% for key, val in elasticsearch.sysconfig.iteritems() %}
+      - set {{ key }} {{ val }}
+      {% endfor %}
+    - formatter: YAML
+    - require:
+      - pkg: elasticsearch

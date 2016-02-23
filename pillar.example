@@ -3,6 +3,8 @@ elasticsearch:
     - 1
     - 7
     - 5-1
+  sysconfig:
+    ES_HEAP_SIZE: 2g
   config:
     cluster:
       name: elasticsearch
@@ -16,7 +18,7 @@ elasticsearch:
           timeout: '3s'
           multicast.enabled: false
     bootstrap:
-      mlockall: false
+      mlockall: true
     http:
       cors:
         enabled: true

@@ -1,6 +1,8 @@
 {% set elasticsearch = salt['grains.filter_by']({
   'RedHat': {
     'pkg': 'elasticsearch',
-    'svc': 'elasticsearch'
+    'svc': 'elasticsearch',
+    'cfg': '/etc/elasticsearch/elasticsearch.yml',
+    'syscfg': '/etc/sysconfig/elasticsearch'
   }
 }, merge=salt['pillar.get']('elasticsearch')) %}
