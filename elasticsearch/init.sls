@@ -13,15 +13,18 @@ elasticsearch:
     - require:
       - pkgrepo: elasticsearch-repo
 
-  file.serialize:
+  file:
+    - managed
     - name: /etc/elasticsearch/elasticsearch.yml
-    - dataset_pillar: elasticsearch:config
-    - formatter: YAML
+    - source: salt://elasticsearch/files/conf_file.jinja
+    - template: jinja
     - user: elasticsearch
     - group: elasticsearch
-    - mode: 644
+    - mode: 644  
+    - context:
+      settings: {{ config|json }}
     - require:
-      - pkg: elasticsearch
+      - pkg: elasticsearch        
 
   service:
     - name: {{ elasticsearch.svc }}
